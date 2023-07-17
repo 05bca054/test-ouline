@@ -13,6 +13,8 @@ services:
       - POSTGRES_DB=outline
     volumes:
       - ./data/master:/var/lib/postgresql/data
+      - ./postgre-config/primary/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+      - ./postgre-config/primary/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     ports:
       - "5432:5432"
     restart: always
@@ -26,6 +28,8 @@ services:
       - POSTGRES_MASTER_HOST=postgres-master
     volumes:
       - ./data/slave:/var/lib/postgresql/data
+      - ./postgre-config/replica/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+      - ./postgre-config/replica/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     ports:
       - "5433:5432"
     depends_on:
